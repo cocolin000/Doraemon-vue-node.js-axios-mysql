@@ -1,6 +1,6 @@
 <template>
-    <!-- <VideoFlv  :v_id="v_id" v-if="true" @isVideo="toggleVideo"></VideoFlv> -->
-    <MyVideo  class="video"></MyVideo>
+    <VideoFlv :videoSrc="videoSrc" :v_title="v_title" :v_id="v_id" v-if="bofang" @isVideo="toggleVideo"></VideoFlv>
+    <!-- <MyVideo  class="video"></MyVideo> -->
     <div class="mySlide container-fluid">
       <div class="row">
         <div class="col-12 m-0 p-0">
@@ -26,7 +26,7 @@
                   <img class="img-fluid" v-else :src="defaultAddress + fdata.fpath + fdata.fname" />
                   <div class="information" :title="fdata.title">
                     <h5 class="font-weight-bold filmName"><button class="play"
-                        @click.prevent="playFilm(fdata.fname)">播放</button>{{ fdata.title }}</h5>
+                        @click.prevent="playFilm(fdata.fname,fdata.title)">播放</button>{{ fdata.title }}</h5>
                     <p class="introduce">
                       {{ fdata.introduce }}
                     </p>
@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import MyVideo from "./pages/MyVideo.vue";
-// import VideoFlv from "./pages/VideoFlv.vue";
+// import MyVideo from "./pages/MyVideo.vue";
+import VideoFlv from "./pages/VideoFlv.vue";
 import axiosInstance from "@/assets/utils/request.js";
 import { mapGetters } from "vuex";
 export default {
@@ -69,11 +69,12 @@ export default {
       //视频地址
       videoSrc: "",
       v_id: "aha",
+      v_title:'aha',
     }
   },
   components: {
-    // VideoFlv
-    MyVideo
+    VideoFlv
+    // MyVideo
   },
   methods: {
     handleScroll() {
@@ -111,38 +112,15 @@ export default {
         });
     },
     //播放视频
-    playFilm(filmName) {
+    playFilm(filmName,filmTitle) {
       // 请求视频
-      filmName = 'cn_universDevelop_2021.mp4';
+      // filmName = 'cn_universDevelop_2021.mp4';
       filmName = filmName.slice(0, filmName.indexOf('.'))
       this.v_id = filmName
-      // console.log(encodeURIComponent(filmName),filmName.split('.')[0])
-      this.videoSrc = "http://localhost:8080/media/out/software/films/" + filmName + ".mp4"
+      this.v_title = filmTitle
+      this.videoSrc = "http://124.71.44.221:8989/media/out/software/films/" + filmName + ".mp4"
       // 打开播放窗口
       this.$store.dispatch('video/toggleIs', true)
-      /*  axiosInstance.post('/media', {
-             url: "/video/"+filmName,
-             size: 10
-         })
-             .then(response => {
-                 this.perData = response.data.data
-             }).catch(error => {
-                 console.log(error)
-             }) */
-      //播放视频
-
-      /*        // 创建一个 <a> 标签元素
-       var link = document.createElement('a');
-       // 设置链接地址encodeURIComponent
-       link.setAttribute('href', encodeURI(this.url + filmName));
-       // 设置链接在新标签页中打开
-       link.setAttribute('target', '_blank');
-       // 模拟点击事件以打开链接
-       link.click(); */
-      // this.$router.push(encodeURI(this.url + filmName));
-      // window.location.assign(encodeURI(this.url + filmName))
-      // window.location.href=encodeURI(this.url + filmName)
-      // window.open(encodeURI(this.url + filmName), "播放器", "toolbar=no,menubar=no,scrollbars=no,resizeable=yes,status=no,location=no,titlebar=no", true);
     },
     // 工具函数：节流
     throttle(func, limit) {

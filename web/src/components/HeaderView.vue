@@ -17,38 +17,41 @@
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul class="navbar-nav w-100 justify-content-center align-items-end align-items-sm-center">
                                 <li class="nav-item">
-                                    <router-link class="nav-link p-1 active" to="/">首页</router-link>
+                                    <router-link class="nav-link p-1 active" to="/">欢迎大厅</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link class="nav-link p-1" to="/recommend">推荐</router-link>
+                                    <router-link class="nav-link p-1" to="/recommend">精彩瞬间</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link class="nav-link p-1 " to="/special">专题</router-link>
+                                    <router-link class="nav-link p-1 " to="/special">角色百科</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link class="nav-link p-1 " to="/film">剧场版</router-link>
+                                    <router-link class="nav-link p-1 " to="/film">剧场大片</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link class="nav-link p-1 " to="/play">视频</router-link>
+                                    <router-link class="nav-link p-1 " to="/play">视频推荐</router-link>
                                 </li>
                                 <li class="nav-item">
                                     <router-link v-if="!getLogin"
                                         class="d-block d-sm-none border login p-1 rounded nav-link"
                                         to="/login">注册/登录</router-link>
-                                        <div v-else class="small dropdown d-block d-sm-none">
-                                            <button :title="getUser.uid" class="float-right btn btn-info text-light dropdown-toggle" type="button"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                                {{ getUser.name}}
-                                            </button>
-                                            <div class="small dropdown-menu bg-transparent dropdown-menu-right">
-                                                <a class=" p-1 rounded nav-link my-space dropdown-item" href="#">个人空间</a>
-                                                <a class="  p-1 rounded nav-link my-exit dropdown-item" href="#" @click="exit">退出登录</a>
-                                            </div>
+                                    <div v-else class="small dropdown d-block d-sm-none">
+                                        <button :title="getUser.uid"
+                                            class="float-right btn btn-info text-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown" aria-expanded="false">
+                                            {{ getUser.name }}
+                                        </button>
+                                        <div class="small dropdown-menu bg-transparent dropdown-menu-right">
+                                            <a class=" p-1 rounded nav-link my-space dropdown-item" href="#">个人空间</a>
+                                            <a class="  p-1 rounded nav-link my-exit dropdown-item" href="#"
+                                                @click="exit">退出登录</a>
                                         </div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
-                        <router-link v-if="!getLogin" class="d-none d-sm-block border p-1 rounded nav-link login" to="/login">注册/登录</router-link>
+                        <router-link v-if="!getLogin" class="d-none d-sm-block border p-1 rounded nav-link login"
+                            to="/login">注册/登录</router-link>
                         <div v-else class="small dropdown d-none d-sm-block">
                             <button :title="getUser.uid" class=" btn btn-info text-light dropdown-toggle" type="button"
                                 data-toggle="dropdown" aria-expanded="false">
@@ -76,14 +79,14 @@ export default {
             return this.$store.getters.getUser
         }
     },
-    methods:{
-        exit(){
+    methods: {
+        exit() {
             localStorage.removeItem('isAuthenticated')
-            this.$store.dispatch('toggleLoginState',{
-                state:false,
-                user:{
-                    name:"NULL",
-                    uid:"NULL",
+            this.$store.dispatch('toggleLoginState', {
+                state: false,
+                user: {
+                    name: "NULL",
+                    uid: "NULL",
                 }
             })
             this.$router.replace('/')
@@ -101,7 +104,7 @@ header {
     z-index: 999;
 }
 
-div.dropdown-menu-right{
+div.dropdown-menu-right {
     text-align: right;
 }
 

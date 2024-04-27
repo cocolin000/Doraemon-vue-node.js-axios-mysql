@@ -1,4 +1,4 @@
-
+const fs = require('fs');
 // 引入 js-shortid 
 const shortid = require('js-shortid');
 //配置参数
@@ -12,11 +12,11 @@ const db = require('./db/db');
 let path = require('path')
 // 引入express
 const express = require('express');
-const cors = require('cors');
+
 // 创建web服务器
 const app = express();
 
-app.use(cors())
+
 // 设置静态资源文件夹
 app.use('/media', express.static(path.join(__dirname, 'media')));
 // 解析客户端请求的body中的内容，内部使用 JSON/url/文件上传 处理
@@ -26,14 +26,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 //设置CORS域跨域访问
 app.all('*', function (req, res, next) {
-    const allowedOrigins = ['http://localhost'];
+    const allowedOrigins = ['http://localhost:8080',"http://192.168.251.219:8080","*"];
     const allowedMethods = ['GET', 'POST'];
     const allowedHeaders = ['Content-Type', 'Authorization'];
 
-    const origin = req.headers.origin;
-    /* if (allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    } */
+    // const origin = req.headers.origin;
+    // if (allowedOrigins.includes(origin)) {
+    //     res.setHeader('Access-Control-Allow-Origin', origin);
+    // }
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', '*');
     res.setHeader('Access-Control-Allow-Headers','*');
@@ -43,7 +43,7 @@ app.all('*', function (req, res, next) {
 
 //服务器被访问
 app.use((req, res, next) => {
-    console.log(req.url,  req.method, "访问");
+    console.log(req.url,req.id,req.method, "访问");
     next();
 });
 
@@ -99,16 +99,19 @@ app.post('/queryUall',async (req, res, next) => {
     console.log(req.body);
     await db.dbQueryUser("user", req.body, res, next);
  })
-
- const multer = require('multer');
+ 
+ 
+ //上传文件
+  const multer = require('multer');
 //  ceshi
 // 配置 Multer 中间件
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null,'uploads/');
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+     let fileOriginalName = Buffer.from(file.originalname, 'latin1').toString('utf-8');
+        cb(null, fileOriginalName);
     }
 });
 
@@ -116,9 +119,50 @@ const upload = multer({ storage: storage });
 
 // 处理文件上传的路由
 app.post('/upload', upload.single('file'), (req, res) => {
-    if (!req.file) {
+	if (!req.file) {
         return res.status(400).send('未选择文件');
     }
 
     res.send('文件上传成功');
 });
+
+
+app.get('/fpath',async (req,res)=>{
+	res.send(JSON.stringify(await getAllFiles(__dirname+'/media'), null, 2))
+});
+// 递归地获取文件夹内的所有文件，返回树状结构的路径
+async function getAllFiles(folderPath) {
+    try {
+        const files = await fs.promises.readdir(folderPath); // 使用异步方法读取文件夹内容
+
+        let result = {
+            path: folderPath,
+            type: 'folder',
+            children: []
+        };
+
+        for (const file of files) {
+            const filePath = path.join(folderPath, file);
+            try {
+                const stats = await fs.promises.stat(filePath); // 使用异步方法获取文件/文件夹信息
+
+                if (stats.isFile()) {
+                    result.children.push({
+                        path: filePath,
+                        type: 'file'
+                    });
+                } else if (stats.isDirectory()) {
+                    const nestedFiles = await getAllFiles(filePath); // 递归调用该函数
+                    result.children.push(nestedFiles); // 将递归结果添加到子文件夹列表中
+                }
+            } catch (error) {
+                console.error(`Error while getting file stats for ${filePath}:`, error);
+            }
+        }
+
+        return result;
+    } catch (error) {
+        console.error(`Error while reading folder ${folderPath}:`, error);
+        return null;
+    }
+}

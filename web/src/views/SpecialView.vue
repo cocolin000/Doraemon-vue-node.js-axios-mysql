@@ -12,10 +12,10 @@
         <div class="col-12 justify-content-center d-flex"><span class="font-weight-bold">主要角色</span></div>
         <div class="mt-2 mb-4 col-12 justify-content-center d-flex"><span
                 class="font-weight-bold text-primary">——</span></div>
-        <div class="col-12 pb-5">
+        <div class="col-12 pb-5" ref="displayOfCutIn">
             <!--角色-->
-            <template v-for="per,index in perData" :key="index">
-                <div class="CutInItem pt-3 pb-3 row border-bottom align-items-center">
+            <template v-for="(per,index) in perData" :key="index">
+                <div class="CutInItem pt-3 pb-3 row border-bottom align-items-center" :style="[styles,{opacity:index==0?1:0}]">
                     <div class="col-xl-4 offset-xl-0 col-lg-3 offset-lg-1 col-md-4 col-12 photoCol">
                         <div class=" personPhoto" style="">
                             <img class="img-fluid" :src="getAddress+per.fpath+per.fname">
@@ -33,6 +33,7 @@
 </template>
 <script>
 import axiosInstance from '@/assets/utils/request'
+import tools from '@/assets/utils/tools'
 import { mapGetters } from 'vuex'
 export default{
   name:'SpecialView',
@@ -46,6 +47,11 @@ data(){
                 introduce:"加载中……",
             }
            ], 
+           //划入显示样式
+           styles:{
+            transition:"opacity 700ms 0s ease-in-out,left 700ms 0s ease-in-out,right 700ms 0s ease-in-out",
+            position:"relative",
+           }
     }
   },
   computed:{
@@ -60,7 +66,10 @@ data(){
                 this.perData = response.data.data
             }).catch(error => {
                 console.log(error)
-            })
+            });
+            // 使用划入显示
+            tools.displayOfCutIn(this.$refs.displayOfCutIn.children)
+            // tools.contactor()
   }
 }
 </script>

@@ -129,7 +129,7 @@
       source: {
         type: String,
         // default:"https://media.w3.org/2010/05/sintel/trailer.mp4",
-        default: "http://localhost:8080/media/out/software/films/cn_universDevelop_2021.mp4",
+        default: "http://124.71.44.221:8989/media/out/software/films/cn_universDevelop_2021.mp4",
         required: true,
       },
       videoObj: {

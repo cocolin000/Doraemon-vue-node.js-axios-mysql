@@ -36,7 +36,7 @@ export default {
         return {
         //热点图
             recData: [],
-            baseUrl:"http://localhost:8080/media/img/wonderful/",
+            baseUrl:"http://124.71.44.221:8989/media/img/wonderful/",
         }
     },
     created(){

@@ -2,7 +2,7 @@
 // 导入所需的模块 加密 解密 创建密匙
 const { encryptText, decryptText, createSecretKey } = require('../utils/passwordUtils');
 // 加密密钥（必须是 32 个字符）
-const secretKey = "a1c1c2841e31df2adaaaaf24e6ce05a";
+const secretKey = "a1c1c2841e31df25d2bfa3f24e6ce05a";
 
 // mysql 连接池配置文件
 const mysql = require('mysql');

@@ -32,9 +32,11 @@
             <div class="col-12">
                 <div @click="routerClick" class="row justify-content-center">
                     <div v-for="section, index in sections" :key="index" class="col-lg-2 col-md-4 col-6 p-1 m-0 ">
-                        <a :href="section.to" :title="section.title" class="nav-link d-flex flex-column align-items-center">
+                        <a :href="section.to" :title="section.title"
+                            class="nav-link d-flex flex-column align-items-center">
                             <!-- 图标 -->
-                            <i :class="section.iconClass" :href="section.to" class="fa d-block" style="font-size: 2rem"></i>
+                            <i :class="section.iconClass" :href="section.to" class="fa d-block"
+                                style="font-size: 2rem"></i>
                         </a>
                         <div class="lineTop"></div>
                         <div class="lineRight"></div>
@@ -74,7 +76,7 @@ export default {
     name: 'HomeView',
     data() {
         return {
-            baseUrl: "http://localhost:8080/media/img/banner/",
+            baseUrl: "http://124.71.44.221:8989/media/img/banner/",
             banners: [{}, {
                 fpath: "/media/img/",
                 fname: "poster.jpg"
@@ -143,8 +145,8 @@ export default {
                 console.log(error.message)
             })
     },
-    methods:{
-        routerClick(event){
+    methods: {
+        routerClick(event) {
             event.preventDefault();
             const route = event.target.getAttribute("href");
             this.$router.push(route)
