@@ -52,9 +52,9 @@ export default {
     data() {
         return {
             playData: [
-                { url: 'http://124.71.44.221:8989/media/video/video1.mp4' },
-                { url: 'http://124.71.44.221:8989/media/video/video2.mp4' },
-                { url: 'http://124.71.44.221:8989/media/video/video3.mp4' },
+                { url: 'http://localhost:8585/media/video/video1.mp4' },
+                { url: 'http://localhost:8585/media/video/video2.mp4' },
+                { url: 'http://localhost:8585/media/video/video3.mp4' },
             ]
         }
     },

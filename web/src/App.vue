@@ -55,7 +55,7 @@ export default {
   /*cursor:url("./assets/img/doraemon.png") atuo !important;*/
   margin: 0;
   padding: 0;
-  user-select: none;
+  user-select: text;
   box-sizing: border-box;
   /*border: 1px solid red;*/
   font-family: "站酷小薇LOGO体", "方正少儿_GBK", serif;
@@ -141,12 +141,14 @@ span[class~=text-primary] {
 
 
 ::-webkit-scrollbar-button {
-  /*background-color: red;*/
+   display: none
+
 }
 
 ::-webkit-scrollbar-track {
   /*background-color: transparent;*/
   background-color: pink;
+  border-radius: 25px;
 }
 
 ::-webkit-scrollbar-corner {

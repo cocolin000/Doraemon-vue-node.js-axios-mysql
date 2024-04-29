@@ -72,6 +72,10 @@ export default {
   left: 5px;
   /* 使爱心水平居中 */
   transform: translate(-50%, -50%) rotate(135deg);
-  /* 居中显示 */
+  text-shadow: 
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000; /* 描边效果，可以根据需要调整偏移和颜色 */
 }
 </style>

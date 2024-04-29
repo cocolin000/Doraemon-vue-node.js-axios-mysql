@@ -35,30 +35,27 @@
                                     <router-link v-if="!getLogin"
                                         class="d-block d-sm-none border login p-1 rounded nav-link"
                                         to="/login">注册/登录</router-link>
-                                    <div v-else class="small dropdown d-block d-sm-none">
-                                        <button :title="getUser.uid"
-                                            class="float-right btn btn-info text-light dropdown-toggle" type="button"
-                                            data-toggle="dropdown" aria-expanded="false">
-                                            {{ getUser.name }}
-                                        </button>
-                                        <div class="small dropdown-menu bg-transparent dropdown-menu-right">
-                                            <a class=" p-1 rounded nav-link my-space dropdown-item" href="#">个人空间</a>
-                                            <a class="  p-1 rounded nav-link my-exit dropdown-item" href="#"
-                                                @click="exit">退出登录</a>
+                                        <div v-else class="small dropdown d-block d-sm-none">
+                                            <button :title="getUser.uid" class="float-right btn btn-info text-light dropdown-toggle" type="button"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                                {{ getUser.name}}
+                                            </button>
+                                            <div class="small dropdown-menu bg-transparent dropdown-menu-right">
+                                                <router-link class=" p-1 rounded nav-link my-space dropdown-item" to="/comments">发表评论</router-link>
+                                                <a class="  p-1 rounded nav-link my-exit dropdown-item" href="#" @click="exit">退出登录</a>
+                                            </div>
                                         </div>
-                                    </div>
                                 </li>
                             </ul>
                         </div>
-                        <router-link v-if="!getLogin" class="d-none d-sm-block border p-1 rounded nav-link login"
-                            to="/login">注册/登录</router-link>
+                        <router-link v-if="!getLogin" class="d-none d-sm-block border p-1 rounded nav-link login" to="/login">注册/登录</router-link>
                         <div v-else class="small dropdown d-none d-sm-block">
                             <button :title="getUser.uid" class=" btn btn-info text-light dropdown-toggle" type="button"
                                 data-toggle="dropdown" aria-expanded="false">
                                 {{ getUser.name }}
                             </button>
                             <div class="small dropdown-menu bg-transparent dropdown-menu-left">
-                                <a class=" p-1 rounded nav-link my-space dropdown-item" href="#">个人空间</a>
+                                <router-link class=" p-1 rounded nav-link my-space dropdown-item" to="/comments">发表评论</router-link>
                                 <a class=" p-1 rounded nav-link my-exit dropdown-item" href="#" @click="exit">退出登录</a>
                             </div>
                         </div>
@@ -79,14 +76,25 @@ export default {
             return this.$store.getters.getUser
         }
     },
-    methods: {
-        exit() {
+    mounted(){
+        const user = JSON.parse(sessionStorage.getItem("isAuthenticated"))
+        if (user != null) {
+            //保存登录成功用户
+            // console.log("user", user)
+            this.$store.dispatch("toggleLoginState", user);
+            //跳转路由
+            this.$router.replace("/")
+        }
+    },
+    methods:{
+        exit(){
             localStorage.removeItem('isAuthenticated')
-            this.$store.dispatch('toggleLoginState', {
-                state: false,
-                user: {
-                    name: "NULL",
-                    uid: "NULL",
+            sessionStorage.removeItem('isAuthenticated')
+            this.$store.dispatch('toggleLoginState',{
+                state:false,
+                user:{
+                    name:"NULL",
+                    uid:"NULL",
                 }
             })
             this.$router.replace('/')
@@ -104,7 +112,7 @@ header {
     z-index: 999;
 }
 
-div.dropdown-menu-right {
+div.dropdown-menu-right{
     text-align: right;
 }
 

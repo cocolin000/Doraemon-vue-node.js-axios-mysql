@@ -150,7 +150,7 @@ export default {
         return {
             formData: {
                 name: "raymax",
-                pwd: "11111111",
+                pwd: "00000000",
                 state: 1,
                 // tel:"15698536211",
                 // email:"312312@123123123"
@@ -181,7 +181,7 @@ export default {
             try {
                 const response = await axiosInstance.post('/login', this.formData);
                 console.log("正确",response.data)
-                if (response.data.code == 200 && response.data.data ) {
+                if (response.data.code == 200 && response.data.msg=="登录成功" && response.data.data ) {
                     this.toggleLoginState(true,response.data.data)
                     this.showSuccess(response.data.msg);
                     this.clearFormData();
@@ -224,8 +224,8 @@ export default {
         },
         toggleLoginState(state,user){
             // 保存登录状态
-            localStorage.setItem("isAuthenticated",JSON.stringify({state:state,user:user}));
-            // sessionStorage.setItem("isAuthenticated",JSON.stringify({state:state,user:user}))
+            // localStorage.setItem("isAuthenticated",JSON.stringify({state:state,user:user}));
+            sessionStorage.setItem("isAuthenticated",JSON.stringify({state:state,user:user}))
             //保存登录成功用户
             this.$store.dispatch("toggleLoginState",{state:state,user:user});
             //跳转路由

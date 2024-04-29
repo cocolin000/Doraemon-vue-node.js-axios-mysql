@@ -1,15 +1,15 @@
 // 操作数据库不同表的sql语句
 let test = {
-  insert: "INSERT INTO test(id, name, age) VALUES(?,?,?)",
-  update: "UPDATE test SET name=?, age=? WHERE id=?",
-  delete: "DELETE FROM test WHERE id=?",
-  queryById: "SELECT * FROM test WHERE id=?",
+  insert: "INSERT INTO test(uid, name, age,comment) VALUES(?,?,18,?)",
+  update: "UPDATE test SET name=?, age=? WHERE uid=?",
+  delete: "DELETE FROM test WHERE uid=?",
+  queryById: "SELECT * FROM test WHERE uid=?",
   queryAll: "SELECT * FROM test",
 };
 let user = {
   insert: "INSERT INTO user (name,pwd,tel,email) VALUES(?,?,?,?)",
   update: "UPDATE user SET pwd=?,tel=?,email=? WHERE uid=?",
-  delete: "DELETE FROM user WHERE id=?",
+  delete: "DELETE FROM user WHERE uid=?",
   validatePwd: "SELECT pwd,uid FROM user WHERE name=?",
   query: "SELECT uid,name,pwd FROM user where name = ? limit 1",
   queryAll: "SELECT uid,name,tel,email FROM user limit ?",
