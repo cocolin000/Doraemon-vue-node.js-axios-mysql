@@ -1,8 +1,8 @@
 // 增删改查
 // 导入所需的模块 加密 解密 创建密匙
-const { encryptText, decryptText, createSecretKey } = require('../utils/passwordUtils');
+const { encryptText, decryptText, createSecretKey } = require('../utils/passwordUtils.js');
 // 加密密钥（必须是 32 个字符）
-const secretKey = "a1c1c2841e31df25d2bfa3f24e6ce05a";
+const secretKey = "11111111111111111111111111111111";
 
 // mysql 连接池配置文件
 const mysql = require('mysql');
@@ -117,6 +117,25 @@ let dbQueryAll = (table, req, res, next) => {
         });
     })
 };
+
+
+function addComment(table, req, res, next) {
+    let paramValue = paramList(req);
+    // console.log(paramValue)
+    return new Promise((resolve, reject) => {
+        pool.getConnection((err, connection) => {
+            connection.query(sql[table].insert, [...paramValue], (err, result) => {
+                if (err) {
+                    reject(err)
+                }
+                code.data = result
+                json(res, code, err)
+                //resolve(result)
+                connection.release();
+            });
+        });
+    })
+}
 
 /**
  * @description 获取一个媒体文件
@@ -280,4 +299,5 @@ module.exports = {
     dbMedia,
     dbUser,
     dbQueryUser,
+    addComment,
 }

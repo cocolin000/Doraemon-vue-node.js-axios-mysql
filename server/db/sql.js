@@ -19,8 +19,14 @@ let media = {
   query:"select fpath,fname from media where position(? in fpath)>0 limit ?",
   queryP:"select fpath,fname,title,introduce from media where position(? in fpath)>0  order by fpath asc, fname asc limit ?",
 }
+// 评论
+const comments = {
+  insert:"INSERT INTO comments (uid, comment, name, time) VALUES(?,?,?,?)",
+  queryAll:"SELECT * FROM comments order by time desc",
+}
 module.exports = {
   user,
   test,
-  media
+  media,
+  comments,
 };
