@@ -7,7 +7,6 @@
 ```
 └─doraemon					//根目录
     ├─dist					//前端页面
-<<<<<<< HEAD
     │  ├─public				//静态资源文件
     │  └─src				
     │      ├─assets			//静态资源
@@ -21,12 +20,10 @@
     │      │  └─module
     │      └─views			//组件页面
     │          └─pages
-=======
     │  ├─css				//css样式
     │  ├─fonts				//字体
     │  ├─img				//本地图片
     │  └─js					//JavaScript代码
->>>>>>> 4519c79dfb85893d0565eabc8fe3a368b8e02c58
     └─server				//后端服务器
         ├─db				//数据库
         ├─media				//媒体文件夹
