@@ -52,9 +52,15 @@ export default {
     data() {
         return {
             playData: [
+<<<<<<< HEAD
                 { url: 'http://124.71.107.26:8989/media/video/video1.mp4' },
                 { url: 'http://124.71.107.26:8989/media/video/video2.mp4' },
                 { url: 'http://124.71.107.26:8989/media/video/video3.mp4' },
+=======
+                { url: 'http://localhost:8989/media/video/video1.mp4' },
+                { url: 'http://localhost:8989/media/video/video2.mp4' },
+                { url: 'http://localhost:8989/media/video/video3.mp4' },
+>>>>>>> 4519c79dfb85893d0565eabc8fe3a368b8e02c58
             ]
         }
     },

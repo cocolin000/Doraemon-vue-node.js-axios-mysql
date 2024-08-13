@@ -9,7 +9,11 @@ const doraemon = ` _       __     __                             ______         
 
 import axios from 'axios';
 
+<<<<<<< HEAD
 const baseURL = 'http://124.71.107.26:8989/'; // 替换为你的 API 地址
+=======
+const baseURL = 'http://localhost:8989/'; // 替换为你的 API 地址
+>>>>>>> 4519c79dfb85893d0565eabc8fe3a368b8e02c58
 
 const axiosInstance = axios.create({
   baseURL,

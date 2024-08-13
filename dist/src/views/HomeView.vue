@@ -74,7 +74,11 @@ export default {
     name: 'HomeView',
     data() {
         return {
+<<<<<<< HEAD
             baseUrl: "http://124.71.107.26:8989/media/img/banner/",
+=======
+            baseUrl: "http://localhost:8989/media/img/banner/",
+>>>>>>> 4519c79dfb85893d0565eabc8fe3a368b8e02c58
             banners: [{}, {
                 fpath: "/media/img/",
                 fname: "poster.jpg"

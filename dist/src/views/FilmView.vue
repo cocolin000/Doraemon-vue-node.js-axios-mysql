@@ -118,7 +118,11 @@ export default {
       filmName = filmName.slice(0, filmName.indexOf('.'))
       this.v_id = filmName
       this.v_title = filmTitle
+<<<<<<< HEAD
       this.videoSrc = "http://124.71.107.26:8989/media/out/software/films/" + filmName + ".mp4"
+=======
+      this.videoSrc = "http://localhost:8989/media/out/software/films/" + filmName + ".mp4"
+>>>>>>> 4519c79dfb85893d0565eabc8fe3a368b8e02c58
       // 打开播放窗口
       this.$store.dispatch('video/toggleIs', true)
     },

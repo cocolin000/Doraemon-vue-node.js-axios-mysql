@@ -43,10 +43,17 @@ export default {
             //默认名字
             defaultName: '蓝胖子',
             // 默认头像
+<<<<<<< HEAD
             defaultePortrait: "http://124.71.107.26:8989/media/img/doraemon_logo.png",
             // 评论列表
             comments: [
                 { name: "大雄", time: Date.now(), comment: "长风破浪会有时,直挂云帆济沧海", portrait: "http://124.71.107.26:8989/media/img/person/dx.png" },
+=======
+            defaultePortrait: "http://localhost:8989/media/img/doraemon_logo.png",
+            // 评论列表
+            comments: [
+                { name: "大雄", time: Date.now(), comment: "长风破浪会有时,直挂云帆济沧海", portrait: "http://localhost:8989/media/img/person/dx.png" },
+>>>>>>> 4519c79dfb85893d0565eabc8fe3a368b8e02c58
             ],
             comment: null,
             // 用户输入
@@ -121,7 +128,11 @@ export default {
     },
     mounted() {
         // 创建web socket 
+<<<<<<< HEAD
         this.ws = new WebSocket('ws://124.71.107.26:8989/');
+=======
+        this.ws = new WebSocket('ws://localhost:8989/');
+>>>>>>> 4519c79dfb85893d0565eabc8fe3a368b8e02c58
         this.ws.onopen = () => {
             console.log('connection established');
 

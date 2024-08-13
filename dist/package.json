@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "test",
+=======
+  "name": "ray_max",
+>>>>>>> 4519c79dfb85893d0565eabc8fe3a368b8e02c58
   "version": "0.1.0",
   "private": true,
   "scripts": {
